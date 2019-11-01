@@ -9,4 +9,9 @@ describe "Author", type: :feature do
     expect(author.homepage).to eq('http://wikipedia.org/Alan_Turing')
   end
 
+  it "should have a method called name, which returns the first and last name as a string together", type: :model do
+    author = Author.new(first_name: 'Alan', last_name: 'Turing', homepage: 'http://wikipedia.org/Alan_Turing')
+    expect(author.name).to eq('Alan Turing')
+  end
+
 end
