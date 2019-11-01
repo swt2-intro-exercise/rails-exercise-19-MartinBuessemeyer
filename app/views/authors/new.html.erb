@@ -1,5 +1,24 @@
 <html>
     <body>
-        <h1>Hallo.</h1>
+    <%= form_with scope: :author, local: true do |form| %>
+      <p>
+        <%= form.label :First_name%><br>
+        <%= form.text_field :first_name%>
+      </p>
+
+      <p>
+        <%= form.label :Last_name%><br>
+        <%= form.text_field :last_name%>
+      </p>
+
+      <p>
+        <%= form.label :Homepage%><br>
+        <%= form.text_field :homepage%>
+      </p>
+
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
     </body>
 </html> 
