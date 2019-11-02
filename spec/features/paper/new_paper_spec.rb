@@ -1,73 +1,31 @@
 require 'rails_helper'
 
-describe 'New Paper' do
-  before do
-    @paper = FactoryBot.create :paper
+RSpec.describe Paper, type: :model do
+  # TODO: test validations
+  it "should not validate without title" do
+    paper = Paper.new(venue:"Some venue", year:2002)
+    expect(paper).to_not be_valid
   end
 
-  after do
-    # Do nothing
+  it "should not validate without venue" do
+    paper = Paper.new(title:"Some title", year:2002)
+    expect(paper).to_not be_valid
   end
 
-    it 'is created when  paper is valid' do
-      count = Paper.count
-      visit new_paper_path
-      page.fill_in 'paper[year]', with: 2142
-      page.fill_in 'paper[venue]', with: 'http://wikipedia.org/Alan_Turing'
-      page.fill_in 'paper[title]', with: 'lololo rofl'
-      find('input[type="submit"]').click
-      expect(Paper.count).to eq(count + 1)
-    end
-
-  it 'is not  create  when paper is not valid' do
-    count = Paper.count
-    visit new_paper_path
-    page.fill_in 'paper[venue]', with: 'http://wikipedia.org/Alan_Turing'
-    page.fill_in 'paper[title]', with: 'lololo rofl'
-    find('input[type="submit"]').click
-    expect(Paper.count).to eq(count)
+  it "should not validate without year" do
+    paper = Paper.new(title:"Some title", venue:"Some venue")
+    expect(paper).to_not be_valid
   end
 
-  it 'is not  create  when paper is not valid' do
-    count = Paper.count
-    visit new_paper_path
-    page.fill_in 'paper[year]', with: 2142
-    page.fill_in 'paper[title]', with: 'lololo rofl'
-    find('input[type="submit"]').click
-    expect(Paper.count).to eq(count)
+  it "should only accept numeric years" do
+    paper = Paper.new(title:"Some title", venue:"Some venue", year:"Some year")
+    expect(paper).to_not be_valid
   end
 
-  it 'is not  create  when paper is not valid' do
-    count = Paper.count
-    visit new_paper_path
-    page.fill_in 'paper[year]', with: 2142
-    page.fill_in 'paper[venue]', with: 'http://wikipedia.org/Alan_Turing'
-    find('input[type="submit"]').click
-    expect(Paper.count).to eq(count)
+  it "should only accept integer years" do
+    paper = Paper.new(title:"Some title", venue:"Some venue", year:19.3)
+    expect(paper).to_not be_valid
   end
 
-  it 'is not  create  when paper is not valid' do
-    count = Paper.count
-    visit new_paper_path
-    page.fill_in 'paper[year]', with: 'alla'
-    page.fill_in 'paper[venue]', with: 'http://wikipedia.org/Alan_Turing'
-    page.fill_in 'paper[title]', with: 'lololo rofl'
-    find('input[type="submit"]').click
-    expect(Paper.count).to eq(count)
-  end
-
-  it 'is not  create  when paper is not valid' do
-    count = Paper.count
-    visit new_paper_path
-    page.fill_in 'paper[year]', with: 2142
-    page.fill_in 'paper[venue]', with: ''
-    page.fill_in 'paper[title]', with: ''
-    find('input[type="submit"]').click
-    expect(Paper.count).to eq(count)
-  end
-
-  it "should have authors" do
-    @paper.authors
-  end
 
 end
