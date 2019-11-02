@@ -2,6 +2,20 @@
 <body>
 <h1>Create new author</h1>
 
+<% if @author.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@author.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @author.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with scope: :author, url: authors_path, local: true do |form| %>
   <p>
     <%= form.label :first_name %><br>
