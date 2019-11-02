@@ -1,24 +1,26 @@
 <html>
-    <body>
-    <%= form_with scope: :author, url: authors_path, local: true do |form| %>
-      <p>
-        <%= form.label :First_name%><br>
-        <%= form.text_field :first_name%>
-      </p>
+<body>
+<h1>Create new author</h1>
 
-      <p>
-        <%= form.label :Last_name%><br>
-        <%= form.text_field :last_name%>
-      </p>
+<%= form_with scope: :author, url: authors_path, local: true do |form| %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+  </p>
 
-      <p>
-        <%= form.label :Homepage%><br>
-        <%= form.text_field :homepage%>
-      </p>
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_area :last_name %>
+  </p>
 
-      <p>
-        <%= form.submit %>
-      </p>
-    <% end %>
-    </body>
-</html> 
+  <p>
+    <%= form.label :homepage %><br>
+    <%= form.text_area :homepage %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+</body>
+</html>
