@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'New Paper' do
   before do
-    # Do nothing
+    @paper = FactoryBot.create :paper
   end
 
   after do
@@ -64,6 +64,10 @@ describe 'New Paper' do
     page.fill_in 'paper[title]', with: ''
     find('input[type="submit"]').click
     expect(Paper.count).to eq(count)
+  end
+
+  it "should have authors" do
+    @paper.authors
   end
 
 end

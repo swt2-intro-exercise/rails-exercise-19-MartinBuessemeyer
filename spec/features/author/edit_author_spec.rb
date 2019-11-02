@@ -31,4 +31,8 @@ describe "Edit author page", type: :feature do
     find('input[type="submit"]').click
     expect(page).to have_text('Last name can\'t be blank')
   end
+
+  it "should have papers" do
+    @author.papers
+  end
 end

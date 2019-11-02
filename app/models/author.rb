@@ -1,4 +1,5 @@
 class Author < ApplicationRecord
+  has_and_belongs_to_many :papers
   def name
     first_name.concat(" ", last_name)
   end
