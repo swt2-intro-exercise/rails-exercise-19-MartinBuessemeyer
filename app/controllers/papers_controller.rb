@@ -33,7 +33,7 @@ class PapersController < ApplicationController
   # PATCH/PUT /papers/1
   def update
     params = paper_params
-    if @paper.update(params) and update_paper_authors
+    if @paper.update(params) #and update_paper_authors
       redirect_to @paper, notice: 'Paper was successfully updated.'
     else
       render :edit
