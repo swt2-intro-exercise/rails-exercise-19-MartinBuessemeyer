@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "papers/edit", type: :view do
   before(:each) do
-    @paper = assign(:paper, Paper.create!(
-      :title => "MyString",
-      :venue => "MyString",
-      :year => 1
-    ))
+    #@paper = assign(:paper, Paper.create!(
+      #:title => "MyString",
+      #:venue => "MyString",
+      #:year => 1
+    #))
+    @paper = create(:paper)
   end
 
   it "renders the edit paper form" do
@@ -20,5 +21,10 @@ RSpec.describe "papers/edit", type: :view do
 
       assert_select "input[name=?]", "paper[year]"
     end
+  end
+
+  it "contains a selection list for authors" do
+    render
+    expect(rendered).to have_field('paper[author_ids][]')
   end
 end
