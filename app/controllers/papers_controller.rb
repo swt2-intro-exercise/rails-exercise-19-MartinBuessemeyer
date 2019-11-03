@@ -3,10 +3,10 @@ class PapersController < ApplicationController
 
   # GET /papers
   def index
-    if params[:year] == NIL and is_int(params[:year])
-      @papers = Paper.all
+    if params.permit(:year)[:year] != NIL and is_int(params.permit(:year)[:year])
+      @papers = Paper.in_year(params.permit(:year)[:year])
     else
-      @papers = Paper.in_year(params[:year])
+      @papers = Paper.all
     end
   end
 
