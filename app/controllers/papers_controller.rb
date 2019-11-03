@@ -3,7 +3,11 @@ class PapersController < ApplicationController
 
   # GET /papers
   def index
-    @papers = Paper.all
+    if params[:year] == NIL and is_int(params[:year])
+      @papers = Paper.all
+    else
+      @papers = Paper.in_year(params[:year])
+    end
   end
 
   # GET /papers/1
@@ -56,5 +60,8 @@ class PapersController < ApplicationController
     def paper_params
       params.require(:paper).permit(:title, :venue, :year, author_ids: [])
     end
-
+    def is_int(string)
+      num = string.to_i
+      return num.to_s == string
+    end
 end
